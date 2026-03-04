@@ -4,6 +4,7 @@
   bash,
   nodejs,
   bun,
+  supabase-cli,
 }:
 mkShell rec {
   name = "comp-4513-asg-2";
@@ -17,5 +18,8 @@ mkShell rec {
 
     # Required for CI for format checking.
     alejandra
+
+    # Supabase CLI for local dev & migrations
+    supabase-cli
   ];
 }

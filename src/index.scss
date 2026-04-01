@@ -17,6 +17,6 @@
 
   > main {
     flex: 1;
-    max-width: map.get(map.get($breakpoints, "md"), "viewport");
+    max-width: map.get(map.get($breakpoints, "lg"), "viewport");
   }
 }

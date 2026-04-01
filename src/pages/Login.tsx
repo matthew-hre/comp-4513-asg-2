@@ -14,15 +14,12 @@ export default function Login() {
 
   if (user) {
     return (
-      <div className="mx-auto flex max-w-sm flex-col items-center gap-4 pt-20">
-        <p className="text-lg">
+      <div className="login_container">
+        <p>
           Signed in as <strong>{user.email}</strong>
         </p>
         <button
-          className="
-            w-full rounded-lg bg-red-600 px-4 py-2 font-medium text-white
-            hover:bg-red-700
-          "
+          className="container-fluid"
           onClick={async () => {
             await logout();
             navigate("/");
@@ -50,62 +47,71 @@ export default function Login() {
   }
 
   return (
-    <div className="mx-auto flex max-w-sm flex-col gap-6 pt-20">
-      <h1 className="text-center text-2xl font-bold">
+    <div className="login_container">
+      <h1>
         {isSignup ? "Create Account" : "Log In"}
       </h1>
 
-      <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-        <input
-          className="
-            rounded-lg border border-white/20 bg-white/5 px-4 py-2
-            focus:border-blue-500 focus:outline-none
-          "
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Email"
-          required
-          type="email"
-          value={email}
-        />
-        <input
-          className="
-            rounded-lg border border-white/20 bg-white/5 px-4 py-2
-            focus:border-blue-500 focus:outline-none
-          "
-          minLength={6}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
-          required
-          type="password"
-          value={password}
-        />
+      <form onSubmit={handleSubmit}>
+        <fieldset>
+          <label
+            htmlFor="email"
+          >Email
+            <input
+              aria-describedby="valid-helper"
+              aria-invalid={
+                error !== null ? "true" : undefined
+              }
+              id="email"
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Email"
+              required
+              type="email"
+              value={email}
+            />
+            {error && (
+              <small id="valid-helper">
+                {error}
+              </small>
+            )}
+          </label>
+          <label
+            htmlFor="password"
+          >Password
+            <input
+              aria-describedby="valid-helper"
+              aria-invalid={error !== null ? "true" : undefined}
+              id="password"
+              minLength={6}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Password"
+              required
+              type="password"
+              value={password}
+            />
+            {error && (
+              <small id="valid-helper">
+                {error}
+              </small>
+            )}
+          </label>
 
-        {error && (
-          <p className="text-sm text-red-400">{error}</p>
-        )}
-
-        <button
-          className="
-            rounded-lg bg-blue-600 px-4 py-2 font-medium text-white
-            hover:bg-blue-700
-          "
-          type="submit"
-        >
-          {isSignup ? "Sign Up" : "Log In"}
-        </button>
+          <button type="submit">
+            {isSignup ? "Sign Up" : "Log In"}
+          </button>
+        </fieldset>
       </form>
 
-      <p className="text-center text-sm text-white/50">
+      <p className="container-fluid" style={{ textAlign: "center" }}>
         {isSignup ? "Already have an account?" : "Don't have an account?"}{" "}
-        <button
-          className="text-blue-400 underline"
+        <a
           onClick={() => {
             setIsSignup(!isSignup);
             setError(null);
           }}
         >
           {isSignup ? "Log in" : "Sign up"}
-        </button>
+        </a>
       </p>
     </div>
   );

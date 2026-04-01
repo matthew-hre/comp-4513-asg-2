@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router";
 
 import App from "./App";
-import "./index.css";
+import "./index.scss";
 import { AuthProvider } from "./lib/auth";
 import Artist from "./pages/Artist";
 import Artists from "./pages/Artists";

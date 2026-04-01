@@ -14,7 +14,7 @@ export default function Login() {
 
   if (user) {
     return (
-      <div className="login_container">
+      <div>
         <p>
           Signed in as <strong>{user.email}</strong>
         </p>
@@ -47,7 +47,7 @@ export default function Login() {
   }
 
   return (
-    <div className="login_container">
+    <div>
       <h1>
         {isSignup ? "Create Account" : "Log In"}
       </h1>

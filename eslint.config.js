@@ -1,6 +1,5 @@
 import js from "@eslint/js";
 import stylistic from "@stylistic/eslint-plugin";
-import betterTailwindcss from "eslint-plugin-better-tailwindcss";
 import n from "eslint-plugin-n";
 import perfectionist from "eslint-plugin-perfectionist";
 import reactHooks from "eslint-plugin-react-hooks";
@@ -25,7 +24,6 @@ export default defineConfig([
     },
     plugins: {
       "@stylistic": stylistic,
-      "better-tailwindcss": betterTailwindcss,
       n,
     },
     rules: {
@@ -42,9 +40,6 @@ export default defineConfig([
         varsIgnorePattern: "^_",
         ignoreRestSiblings: true,
       }],
-
-      // i like having my tailwind auto-sorted
-      ...betterTailwindcss.configs["recommended-warn"].rules,
 
       // this needs to be explicitly ignored
       "n/no-process-env": "error",

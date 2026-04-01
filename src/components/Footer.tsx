@@ -1,8 +1,6 @@
 export default function Footer() {
   return (
-    <footer className="
-      border-t border-white/10 px-6 py-4 text-center text-sm text-white/50
-    ">
+    <footer className="container-fluid" style={{ textAlign: "center" }}>
       <a
         href="https://github.com/matthew-hre/comp-4513-asg-2"
         rel="noreferrer"

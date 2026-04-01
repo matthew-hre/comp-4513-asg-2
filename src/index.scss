@@ -1,0 +1,22 @@
+@use "sass:map";
+@use "@picocss/pico/scss/pico" as * with (
+  $theme-color: "indigo",
+  $semantic-root-element: "#root",
+  $enable-semantic-container: true,
+  $enable-classes: false
+);
+
+@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap');
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: "Figtree", sans-serif;
+  --pico-font-family: "Figtree", sans-serif;
+
+  > main {
+    flex: 1;
+    max-width: map.get(map.get($breakpoints, "md"), "viewport");
+  }
+}

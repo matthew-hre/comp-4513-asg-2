@@ -1,5 +1,11 @@
 # React + TypeScript + Vite
 
+## AI Usage
+
+> The landing page styles were created primarily with AI. I personally read and audited all the code myself, and have linked the thread below
+>
+> https://ampcode.com/threads/T-019d745e-00c2-74df-9000-87518a08cb69
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:

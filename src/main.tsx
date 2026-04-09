@@ -7,7 +7,7 @@ import "./index.scss";
 import { AuthProvider } from "./lib/auth";
 import Artist from "./pages/Artist";
 import Artists from "./pages/Artists";
-import Browse from "./pages/Browse";
+import Songs from "./pages/Songs";
 import Genre from "./pages/Genre";
 import Genres from "./pages/Genres";
 import Home from "./pages/Home";
@@ -22,7 +22,7 @@ createRoot(document.getElementById("root")!).render(
         <Routes>
           <Route element={<App />}>
             <Route element={<Home />} index />
-            <Route element={<Browse />} path="browse" />
+            <Route element={<Songs />} path="songs" />
             <Route element={<Song />} path="songs/:id" />
             <Route element={<Artists />} path="artists" />
             <Route element={<Artist />} path="artists/:id" />

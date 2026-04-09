@@ -20,7 +20,7 @@ export default function Header() {
         <ul>
           {user ? (
             <>
-              <li><Link to="/browse">Browse</Link></li>
+              <li><Link to="/songs">Songs</Link></li>
               <li><Link to="/artists">Artists</Link></li>
               <li><Link to="/genres">Genres</Link></li>
               <li><Link to="/playlists">Playlists</Link></li>

@@ -18,7 +18,7 @@ type Song = {
   year: null | number;
 };
 
-export default function Browse() {
+export default function Songs() {
   const [filters, setFilters] = useState<FilterState>({
     artists: [],
     genres: [],
@@ -200,7 +200,7 @@ export default function Browse() {
 
   return (
     <div>
-      <h1>Browse</h1>
+      <h1>Songs</h1>
       <form
         onSubmit={(e) => {
           e.preventDefault();

@@ -358,6 +358,10 @@ INSERT INTO songs VALUES(1315,'Middle Of The Night',153,105,2017,130,75,59,-4,8,
 INSERT INTO songs VALUES(1316,'Jocelyn Flores',163,112,2017,134,39,87,-9,30,44,119,47,24,89);
 INSERT INTO songs VALUES(1317,'Never Forget You',168,110,2017,146,73,58,-6,27,28,213,0,5,78);
 INSERT INTO songs VALUES(1318,'I Would Like',168,110,2017,121,71,49,-4,8,30,227,9,5,62);
+INSERT INTO playlist_names VALUES(1,'Chill Vibes');
+INSERT INTO playlist_names VALUES(2,'Workout Mix');
+INSERT INTO playlist_names VALUES(3,'Road Trip');
+INSERT INTO playlist_names VALUES(4,'Late Night');
 INSERT INTO playlists VALUES(1,1,1010);
 INSERT INTO playlists VALUES(2,1,1032);
 INSERT INTO playlists VALUES(3,1,1007);
@@ -388,3 +392,5 @@ INSERT INTO playlists VALUES(27,4,1311);
 INSERT INTO playlists VALUES(28,4,1050);
 INSERT INTO playlists VALUES(29,4,1029);
 INSERT INTO playlists VALUES(30,4,1101);
+SELECT setval(pg_get_serial_sequence('playlists', 'id'), (SELECT MAX(id) FROM playlists));
+SELECT setval(pg_get_serial_sequence('playlist_names', 'playlist_id'), (SELECT MAX(playlist_id) FROM playlist_names));

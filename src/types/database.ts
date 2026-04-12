@@ -102,6 +102,21 @@ export type Database = {
           genre_name?: null | string
         }
       }
+      playlist_names: {
+        Insert: {
+          name: string
+          playlist_id?: number
+        }
+        Relationships: []
+        Row: {
+          name: string
+          playlist_id: number
+        }
+        Update: {
+          name?: string
+          playlist_id?: number
+        }
+      }
       playlists: {
         Insert: {
           id?: number

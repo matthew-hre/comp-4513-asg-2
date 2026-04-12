@@ -8,13 +8,13 @@ import { AuthProvider } from "./lib/auth";
 import { ProtectedRoute } from "./lib/ProtectedRoute";
 import Artist from "./pages/Artist";
 import Artists from "./pages/Artists";
-import Songs from "./pages/Songs";
 import Genre from "./pages/Genre";
 import Genres from "./pages/Genres";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Playlists from "./pages/Playlists";
 import Song from "./pages/Song";
+import Songs from "./pages/Songs";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

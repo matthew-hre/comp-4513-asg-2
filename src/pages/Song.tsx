@@ -4,6 +4,7 @@ import { PolarAngleAxis, PolarGrid, PolarRadiusAxis, Radar, RadarChart, Responsi
 
 import type { Tables } from "../types/database";
 
+import SongList from "../components/SongList";
 import supabase from "../lib/supabase";
 
 type RelatedSong = {
@@ -11,6 +12,7 @@ type RelatedSong = {
   artist_name: null | string;
   song_id: number;
   title: null | string;
+  year: null | number;
 };
 
 const ANALYTIC_KEYS = ["danceability", "energy", "speechiness", "acousticness", "liveness", "valence"] as const;
@@ -73,7 +75,7 @@ export default function Song() {
 
       const { data: allSongs } = await supabase
         .from("songs")
-        .select("song_id, title, artist_id, danceability, energy, speechiness, acousticness, liveness, valence")
+        .select("song_id, title, year, artist_id, danceability, energy, speechiness, acousticness, liveness, valence")
         .neq("song_id", Number(id));
 
       if (allSongs) {
@@ -97,6 +99,7 @@ export default function Song() {
           artist_name: artistMap.get(s.artist_id!) ?? null,
           song_id: s.song_id,
           title: s.title,
+          year: s.year,
         })));
       }
 
@@ -245,32 +248,7 @@ export default function Song() {
         <header>
           <h2 style={{ marginBottom: 0 }}>Related Songs</h2>
         </header>
-        {relatedSongs.length === 0 ? (
-          <p><em>No related songs found.</em></p>
-        ) : (
-          <div style={{
-            display: "grid",
-            gap: "1rem",
-            gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
-          }}>
-            {relatedSongs.map(rs => (
-              <article key={rs.song_id} style={{ marginBottom: 0 }}>
-                <Link to={`/songs/${rs.song_id}`}>
-                  <strong>{rs.title || "Untitled"}</strong>
-                </Link>
-                {rs.artist_name && (
-                  <p style={{ marginBottom: 0 }}>
-                    <small>
-                      <Link to={`/artists/${rs.artist_id}`}>
-                        {rs.artist_name}
-                      </Link>
-                    </small>
-                  </p>
-                )}
-              </article>
-            ))}
-          </div>
-        )}
+        <SongList songs={relatedSongs} />
       </article>
 
       <dialog ref={dialogRef}>

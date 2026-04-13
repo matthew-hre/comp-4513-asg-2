@@ -435,7 +435,7 @@ export default function Songs() {
                     </Link>
                   </td>
                   <td>
-                    <Link to={`/artist/${song.artist_id}`}>
+                    <Link to={`/artists/${song.artist_id}`}>
                       {artistName}
                     </Link>
                   </td>

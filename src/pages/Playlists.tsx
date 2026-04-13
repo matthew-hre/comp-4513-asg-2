@@ -216,12 +216,8 @@ export default function Playlists() {
                   <tr
                     key={p.playlist_id}
                     onClick={() => setSelectedPlaylistId(p.playlist_id)}
-                    style={{
-                      background: selectedPlaylistId === p.playlist_id
-                        ? "var(--pico-primary-focus)"
-                        : undefined,
-                      cursor: "pointer",
-                    }}
+                    style={{ cursor: "pointer" }}
+                    className={selectedPlaylistId === p.playlist_id ? "selected-row" : ""}
                   >
                     <td>
                       <strong>{p.name}</strong>

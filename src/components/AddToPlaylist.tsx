@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 
 import type { Tables } from "../types/database";
 
+import { useAuth } from "../lib/auth";
 import supabase from "../lib/supabase";
 import Toast from "./Toast";
 
@@ -14,6 +15,7 @@ interface AddToPlaylistProps {
 }
 
 export default function AddToPlaylist({ onAdded, songId, songTitle }: AddToPlaylistProps) {
+  const { user } = useAuth();
   const [playlists, setPlaylists] = useState<PlaylistOption[]>([]);
   const [toast, setToast] = useState<null | string>(null);
   const dialogRef = useRef<HTMLDialogElement>(null);
@@ -28,6 +30,8 @@ export default function AddToPlaylist({ onAdded, songId, songTitle }: AddToPlayl
 
     fetchPlaylists();
   }, []);
+
+  if (!user) return null;
 
   const handleAdd = async (playlistId: number) => {
     const playlistName = playlists.find(p => p.playlist_id === playlistId)?.name || "playlist";

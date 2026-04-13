@@ -20,20 +20,15 @@ export default function Header() {
           </li>
         </ul>
         <ul>
+          <li><Link to="/songs">Songs</Link></li>
+          <li><Link to="/artists">Artists</Link></li>
+          <li><Link to="/genres">Genres</Link></li>
+          {user && <li><Link to="/playlists">Playlists</Link></li>}
+          <li><a href="#" onClick={(e) => { e.preventDefault(); dialogRef.current?.showModal(); }}>About</a></li>
           {user ? (
-            <>
-              <li><Link to="/songs">Songs</Link></li>
-              <li><Link to="/artists">Artists</Link></li>
-              <li><Link to="/genres">Genres</Link></li>
-              <li><Link to="/playlists">Playlists</Link></li>
-              <li><a href="#" onClick={(e) => { e.preventDefault(); dialogRef.current?.showModal(); }}>About</a></li>
-              <li><button onClick={logout}>Logout</button></li>
-            </>
+            <li><button onClick={logout}>Logout</button></li>
           ) : (
-            <>
-              <li><a href="#" onClick={(e) => { e.preventDefault(); dialogRef.current?.showModal(); }}>About</a></li>
-              <li><Link to="/login">Login</Link></li>
-            </>
+            <li><Link to="/login">Login</Link></li>
           )}
         </ul>
       </nav>

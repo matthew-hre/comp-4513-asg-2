@@ -23,12 +23,12 @@ createRoot(document.getElementById("root")!).render(
         <Routes>
           <Route element={<App />}>
             <Route element={<Home />} index />
-            <Route element={<ProtectedRoute element={<Songs />} />} path="songs" />
-            <Route element={<ProtectedRoute element={<Song />} />} path="songs/:id" />
-            <Route element={<ProtectedRoute element={<Artists />} />} path="artists" />
-            <Route element={<ProtectedRoute element={<Artist />} />} path="artists/:id" />
-            <Route element={<ProtectedRoute element={<Genres />} />} path="genres" />
-            <Route element={<ProtectedRoute element={<Genre />} />} path="genres/:id" />
+            <Route element={<Songs />} path="songs" />
+            <Route element={<Song />} path="songs/:id" />
+            <Route element={<Artists />} path="artists" />
+            <Route element={<Artist />} path="artists/:id" />
+            <Route element={<Genres />} path="genres" />
+            <Route element={<Genre />} path="genres/:id" />
             <Route element={<Login />} path="login" />
             <Route element={<ProtectedRoute element={<Playlists />} />} path="playlists" />
           </Route>

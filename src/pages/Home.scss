@@ -34,21 +34,48 @@
   display: inline-block;
 }
 
-#features {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
-  gap: var(--pico-spacing);
+#featured-artists {
   padding-bottom: 4rem;
 
+  h2 {
+    margin-bottom: var(--pico-spacing);
+  }
+
+  .featured-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+  }
+
   article {
-    h3 {
-      font-size: 1rem;
-      margin-bottom: 0.5rem;
+    margin-bottom: 0;
+    text-align: center;
+
+    a {
+      color: inherit;
+      text-decoration: none;
     }
 
-    p {
-      font-size: 0.875rem;
-      color: var(--pico-muted-color);
+    img {
+      aspect-ratio: 1;
+      border-radius: var(--pico-border-radius);
+      object-fit: cover;
+      width: 100%;
+    }
+
+    .no-image {
+      align-items: center;
+      aspect-ratio: 1;
+      background: var(--pico-secondary-background);
+      border-radius: var(--pico-border-radius);
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+
+    strong {
+      display: block;
+      margin-top: 0.5rem;
     }
   }
 }

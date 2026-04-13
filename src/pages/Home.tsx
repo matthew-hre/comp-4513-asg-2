@@ -1,8 +1,28 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router";
 
+import type { Tables } from "../types/database";
+
+import ArtistCard from "../components/ArtistCard";
+import supabase from "../lib/supabase";
 import "./Home.scss";
 
 export default function Home() {
+  const [artists, setArtists] = useState<Tables<"artists">[]>([]);
+
+  useEffect(() => {
+    const fetchFeaturedArtists = async () => {
+      const { data, error } = await supabase.from("artists").select("*");
+
+      if (!error && data && data.length >= 4) {
+        const shuffled = data.sort(() => Math.random() - 0.5);
+        setArtists(shuffled.slice(0, 4));
+      }
+    };
+
+    fetchFeaturedArtists();
+  }, []);
+
   return (
     <>
       <section id="hero">
@@ -20,28 +40,13 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="features">
-        <article>
-          <h3>Browse</h3>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
-            lacinia odio vitae vestibulum vestibulum.
-          </p>
-        </article>
-        <article>
-          <h3>Discover</h3>
-          <p>
-            Cras ultricies ligula sed magna dictum porta. Proin eget tortor
-            risus. Nulla quis lorem ut libero malesuada feugiat.
-          </p>
-        </article>
-        <article>
-          <h3>Playlist</h3>
-          <p>
-            Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
-            posuere cubilia curae. Donec velit neque, auctor sit amet.
-          </p>
-        </article>
+      <section id="featured-artists">
+        <h2>Featured Artists</h2>
+        <div className="featured-grid">
+          {artists.map(artist => (
+            <ArtistCard artist={artist} key={artist.artist_id} />
+          ))}
+        </div>
       </section>
     </>
   );

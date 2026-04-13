@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
 
+import Toast from "../components/Toast";
 import supabase from "../lib/supabase";
 
 type Playlist = {
@@ -189,23 +190,7 @@ export default function Playlists() {
     <div>
       <h1>Playlists</h1>
 
-      {toast && (
-        <div
-          role="alert"
-          style={{
-            background: "var(--pico-primary-background)",
-            borderRadius: "var(--pico-border-radius)",
-            bottom: "1rem",
-            color: "var(--pico-primary-inverse)",
-            padding: "0.75rem 1.5rem",
-            position: "fixed",
-            right: "1rem",
-            zIndex: 1000,
-          }}
-        >
-          {toast}
-        </div>
-      )}
+      {toast && <Toast message={toast} />}
 
       {loading ? (
         <p aria-busy="true">Loading playlists...</p>
@@ -231,12 +216,8 @@ export default function Playlists() {
                   <tr
                     key={p.playlist_id}
                     onClick={() => setSelectedPlaylistId(p.playlist_id)}
-                    style={{
-                      background: selectedPlaylistId === p.playlist_id
-                        ? "var(--pico-primary-focus)"
-                        : undefined,
-                      cursor: "pointer",
-                    }}
+                    style={{ cursor: "pointer" }}
+                    className={selectedPlaylistId === p.playlist_id ? "selected-row" : ""}
                   >
                     <td>
                       <strong>{p.name}</strong>

@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 
+import type { Tables } from "../types/database";
+
 import SongList from "../components/SongList";
 import supabase from "../lib/supabase";
-import type { Tables } from "../types/database";
 
 type ArtistSong = {
   artist_id: null | number;

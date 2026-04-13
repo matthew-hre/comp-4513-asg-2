@@ -1,11 +1,11 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router";
 import { PolarAngleAxis, PolarGrid, PolarRadiusAxis, Radar, RadarChart, ResponsiveContainer } from "recharts";
 
 import type { Tables } from "../types/database";
 
+import AddToPlaylist from "../components/AddToPlaylist";
 import SongList from "../components/SongList";
-import Toast from "../components/Toast";
 import supabase from "../lib/supabase";
 
 type RelatedSong = {
@@ -25,15 +25,6 @@ export default function Song() {
   const [genre, setGenre] = useState<null | Tables<"genres">>(null);
   const [relatedSongs, setRelatedSongs] = useState<RelatedSong[]>([]);
   const [loading, setLoading] = useState(true);
-
-  const [playlists, setPlaylists] = useState<Tables<"playlist_names">[]>([]);
-  const [toast, setToast] = useState<null | string>(null);
-  const dialogRef = useRef<HTMLDialogElement>(null);
-
-  const showToast = (message: string) => {
-    setToast(message);
-    setTimeout(() => setToast(null), 3000);
-  };
 
   useEffect(() => {
     const fetchSong = async () => {
@@ -110,36 +101,6 @@ export default function Song() {
     fetchSong();
   }, [id]);
 
-  useEffect(() => {
-    const fetchPlaylists = async () => {
-      const { data } = await supabase
-        .from("playlist_names")
-        .select("playlist_id, name");
-      setPlaylists(data || []);
-    };
-
-    fetchPlaylists();
-  }, []);
-
-  const handleAddToPlaylist = async (playlistId: number) => {
-    if (!song) return;
-
-    const playlistName = playlists.find(p => p.playlist_id === playlistId)?.name || "playlist";
-
-    const { error } = await supabase
-      .from("playlists")
-      .insert({ playlist_id: playlistId, song_id: song.song_id });
-
-    if (error) {
-      // eslint-disable-next-line no-console
-      console.error("Error adding to playlist:", error);
-      return;
-    }
-
-    dialogRef.current?.close();
-    showToast(`Added "${song.title || "Untitled"}" to ${playlistName}`);
-  };
-
   if (loading) {
     return <p aria-busy="true">Loading song...</p>;
   }
@@ -192,12 +153,10 @@ export default function Song() {
             </div>
           </div>
 
-          <button
-            onClick={() => dialogRef.current?.showModal()}
-            type="button"
-          >
-            + Add to Playlist
-          </button>
+          <AddToPlaylist
+            songId={song.song_id}
+            songTitle={song.title || "Untitled"}
+          />
         </div>
 
         <div style={{ flex: "1" }}>
@@ -252,39 +211,6 @@ export default function Song() {
         <SongList songs={relatedSongs} />
       </article>
 
-      <dialog ref={dialogRef}>
-        <article>
-          <header>
-            <button
-              aria-label="Close"
-              onClick={() => dialogRef.current?.close()}
-              rel="prev"
-              type="button"
-            />
-            <h2>Add to Playlist</h2>
-          </header>
-          {playlists.length === 0 ? (
-            <p><em>No playlists yet. Create one on the Playlists page.</em></p>
-          ) : (
-            <ul style={{ listStyle: "none", padding: 0 }}>
-              {playlists.map(p => (
-                <li key={p.playlist_id} style={{ marginBottom: "0.5rem" }}>
-                  <button
-                    className="outline"
-                    onClick={() => handleAddToPlaylist(p.playlist_id)}
-                    style={{ width: "100%" }}
-                    type="button"
-                  >
-                    {p.name}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          )}
-        </article>
-      </dialog>
-
-      {toast && <Toast message={toast} />}
     </div>
   );
 }

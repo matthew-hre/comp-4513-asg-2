@@ -3,6 +3,7 @@ import { Link } from "react-router";
 
 import type { Tables } from "../types/database";
 
+import ArtistCard from "../components/ArtistCard";
 import supabase from "../lib/supabase";
 import "./Home.scss";
 
@@ -43,21 +44,7 @@ export default function Home() {
         <h2>Featured Artists</h2>
         <div className="featured-grid">
           {artists.map(artist => (
-            <article key={artist.artist_id}>
-              <Link to={`/artists/${artist.artist_id}`}>
-                {artist.artist_image_url ? (
-                  <img
-                    alt={artist.artist_name || "Artist"}
-                    src={artist.artist_image_url}
-                  />
-                ) : (
-                  <div className="no-image">
-                    <span>No image</span>
-                  </div>
-                )}
-                <strong>{artist.artist_name || "Unknown Artist"}</strong>
-              </Link>
-            </article>
+            <ArtistCard key={artist.artist_id} artist={artist} />
           ))}
         </div>
       </section>

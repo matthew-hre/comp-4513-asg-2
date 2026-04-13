@@ -5,6 +5,7 @@ import { PolarAngleAxis, PolarGrid, PolarRadiusAxis, Radar, RadarChart, Responsi
 import type { Tables } from "../types/database";
 
 import SongList from "../components/SongList";
+import Toast from "../components/Toast";
 import supabase from "../lib/supabase";
 
 type RelatedSong = {
@@ -87,7 +88,7 @@ export default function Song() {
         withDiff.sort((a, b) => a.diff - b.diff);
         const closest = withDiff.slice(0, 8);
 
-        const artistIds = [...new Set(closest.map(s => s.artist_id).filter(Boolean))];
+        const artistIds = [...new Set(closest.map(s => s.artist_id).filter(Boolean))].filter((id): id is number => id !== null);
         const { data: relArtists } = artistIds.length > 0
           ? await supabase.from("artists").select("artist_id, artist_name").in("artist_id", artistIds)
           : { data: [] };
@@ -283,23 +284,7 @@ export default function Song() {
         </article>
       </dialog>
 
-      {toast && (
-        <div
-          role="alert"
-          style={{
-            background: "var(--pico-primary-background)",
-            borderRadius: "var(--pico-border-radius)",
-            bottom: "1rem",
-            color: "var(--pico-primary-inverse)",
-            padding: "0.75rem 1.5rem",
-            position: "fixed",
-            right: "1rem",
-            zIndex: 1000,
-          }}
-        >
-          {toast}
-        </div>
-      )}
+      {toast && <Toast message={toast} />}
     </div>
   );
 }

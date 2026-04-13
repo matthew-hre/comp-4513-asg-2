@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
 
+import Toast from "../components/Toast";
 import supabase from "../lib/supabase";
 
 type FilterState = {
@@ -489,23 +490,7 @@ export default function Songs() {
         </article>
       </dialog>
 
-      {toast && (
-        <div
-          role="alert"
-          style={{
-            background: "var(--pico-primary-background)",
-            borderRadius: "var(--pico-border-radius)",
-            bottom: "1rem",
-            color: "var(--pico-primary-inverse)",
-            padding: "0.75rem 1.5rem",
-            position: "fixed",
-            right: "1rem",
-            zIndex: 1000,
-          }}
-        >
-          {toast}
-        </div>
-      )}
+      {toast && <Toast message={toast} />}
     </div>
   );
 }

@@ -44,7 +44,7 @@ export default function Home() {
         <h2>Featured Artists</h2>
         <div className="featured-grid">
           {artists.map(artist => (
-            <ArtistCard key={artist.artist_id} artist={artist} />
+            <ArtistCard artist={artist} key={artist.artist_id} />
           ))}
         </div>
       </section>

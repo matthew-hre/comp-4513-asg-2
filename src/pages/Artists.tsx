@@ -44,7 +44,7 @@ export default function Artists() {
         }}
       >
         {artists.map(artist => (
-          <ArtistCard key={artist.artist_id} artist={artist} />
+          <ArtistCard artist={artist} key={artist.artist_id} />
         ))}
       </div>
     </div>

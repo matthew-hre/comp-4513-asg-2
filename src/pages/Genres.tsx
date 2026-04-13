@@ -61,7 +61,7 @@ export default function Genres() {
                   width: "100%",
                 }}
               >
-                {genre.genre_name[0].toUpperCase()}
+                {genre.genre_name ? genre.genre_name[0].toUpperCase() : "?"}
               </div>
               <strong style={{ display: "block", marginTop: "0.5rem" }}>
                 {genre.genre_name || "Unknown Genre"}

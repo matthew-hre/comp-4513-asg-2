@@ -1,81 +1,106 @@
-# React + TypeScript + Vite
+# COMP 4513 - Assignment #2
 
 ## AI Usage
 
-> The landing page styles were created primarily with AI. I personally read and audited all the code myself, and have linked the thread below
+> The landing page styles were created primarily with AI. I personally read and audited all the code myself. Additionally, the README documentation was generated with AI assistance. I have linked the threads below:
 >
-> https://ampcode.com/threads/T-019d745e-00c2-74df-9000-87518a08cb69
+> - Landing page styles: https://ampcode.com/threads/T-019d745e-00c2-74df-9000-87518a08cb69
+> - README documentation: https://ampcode.com/threads/T-019d8531-1d3e-71ed-943c-0c09e8c32c08
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
 
-Currently, two official plugins are available:
+This is a React single-page application (SPA) built with Vite and TypeScript that provides an interactive music exploration and playlist management interface. The application consumes song, artist, and genre data from the Assignment 1 API and presents it through multiple views with filtering, searching, and playlist persistence features.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Setup
 
-## React Compiler
+1. Clone the repository:
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+   ```bash
+   git clone https://github.com/matthew-hre/comp-4513-asg-2.git
+   cd comp-4513-asg-2
+   ```
 
-Note: This will impact Vite dev & build performances.
+2. Install dependencies:
 
-## Expanding the ESLint configuration
+   > A couple notes here:
+   >
+   > 1. I run NixOS as my main OS, so I use Nix for development environments. If you don't use Nix, you can skip the `nix develop` step.
+   > 2. I use `bun` over `npm`, as I find it's faster and it plays nicer on my system.
+   > 3. There is an `.envrc` file for `direnv` to automatically load the development environment. If you don't know what that is, you can ignore it.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+   ```bash
+   nix develop
+   bun install
+   ```
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+3. Run the development server:
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+   ```bash
+   bun dev
+   ```
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+4. Build for production:
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+   ```bash
+   bun run build
+   ```
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Technology Stack
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- **Framework:** React 19 with TypeScript
+- **Build Tool:** Vite 7
+- **Routing:** React Router 7
+- **Styling:** Pico CSS + custom SCSS
+- **Charting:** Recharts (for song analytics visualization)
+- **Backend Integration:** Supabase (playlist persistence)
+- **Data Source:** Assignment 1 API
+
+## Features
+
+### Required Views & Functionality
+
+1. **Header/Footer**
+   - Persistent navigation across all views
+   - Dynamic login state display (playlist name/icon, item count, Logout button)
+   - GitHub repository link in footer
+
+2. **Home View**
+   - Custom landing page with hero content
+   - Featured content and navigation to other sections
+
+3. **Artists/Genres Landing**
+   - Browse available artists and genres
+   - Click through to dedicated browse view for each selection
+
+4. **Browse View (Songs)**
+   - **Filters:** Title (text search), Year, Artist, Genre (all additive)
+   - **Controls:** Clear individual filters or reset all; sort by title, year, or artist
+   - **List Display:** Song links to single view and "Add to Playlist" functionality
+
+5. **Single Song View**
+   - Complete song details (Title, Artist, Year, Genre, BPM, etc.)
+   - **Radar Chart Visualizer:** Display song analytics (valence, energy, danceability, etc.)
+   - **Related Songs:** List of songs matching the song's top 3 analytic categories
+
+6. **Single Artist/Genre View**
+   - Detailed information for selection
+   - List of songs within that artist/genre
+
+7. **Playlist Management**
+   - View all playlists
+   - Create new playlists
+   - Delete playlists
+   - Add/remove songs from playlists
+   - Playlist data persists across sessions
+
+8. **Login View**
+   - Authentication system (minimum: simulated login state)
+   - Track logged-in user and associated playlist
+
+9. **About Dialog**
+   - Assignment information
+   - Technologies used
+   - Developer names
+   - GitHub repository link
+
+

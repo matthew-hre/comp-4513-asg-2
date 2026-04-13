@@ -430,12 +430,12 @@ export default function Songs() {
               return (
                 <tr key={song.song_id}>
                   <td>
-                    <Link to={`/song/${song.song_id}`}>
+                    <Link to={`/songs/${song.song_id}`}>
                       {song.title || "Untitled"}
                     </Link>
                   </td>
                   <td>
-                    <Link to={`/artist/${song.artist_id}`}>
+                    <Link to={`/artists/${song.artist_id}`}>
                       {artistName}
                     </Link>
                   </td>
